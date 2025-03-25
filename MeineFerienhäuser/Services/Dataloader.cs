@@ -17,7 +17,8 @@ namespace MeineFerienhäuser.Services
         public async Task<List<House>> GetHouseListAsync()
         {
             HouseValidator validator = new HouseValidator(houses);
-            await validator.RunCheckAsync();
+            //await validator.RunCheckAsync();
+            HouseFactory.SetHouseList(houses);
             return houses;
         }
 

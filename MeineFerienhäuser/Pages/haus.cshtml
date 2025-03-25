@@ -5,6 +5,43 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="container">
+        <div class="row">
+
+    
+        @for (int i = 0; i < Model.houses.Count; i++)
+        {
+            var house = Model.houses[i];
+            <div class="card card-margin" style="width: 18rem;">
+                <img src="@house.GetImageUrl()" class="card-img-top" alt="@Model.altImg">
+                <div class="card-body">
+                    <h6 class="card-title">
+
+                        @{
+                            int hausnr=i+1;
+                        }
+                            <div class="card-text-haus-nummer">
+                                <p class="card-text left-aligned">Haus @hausnr: </p>
+                                <p class="card-text left-aligned">@house.CatalogNumber in @house.AreaName</p>
+                            </div>
+                    </h6>
+                    
+                </div>
+                <ul class="list-group list-group-flush">
+                        <li class="list-group-item left-aligned-icon"> <i class="bi bi-people-fill"></i> @house.Adults Erwachsene</li>
+                        <li class="list-group-item left-aligned-icon"> <i class="bi bi-person-fill"></i> @house.Children Kinder</li>
+                        <li class="list-group-item left-aligned-icon"> <i class="bi bi-bug-fill"> </i>@house.Pets Haustiere</li>
+                </ul>
+                    <p class="card-text card-text-description">@house.GetDescription()</p>
+                    <div class="card-body left-aligned">
+                        <a href="@house.GetLinkUrl()" type="button" class="btn btn-primary ">Zum Haus @house.CatalogNumber</a>
+                </div>
+            </div>
+        }
+        </div>
+        </div>
+
+
 </div>
+
+

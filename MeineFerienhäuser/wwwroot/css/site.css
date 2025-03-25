@@ -20,3 +20,33 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.card-text-description {
+    display: -webkit-box; /* Verwendet Webkit-Box-Layout für flexibles Layout */
+    -webkit-line-clamp: 4; /* Begrenzen auf 4 Zeilen */
+    -webkit-box-orient: vertical; /* Setzt die Richtung der Box auf vertikal */
+    overflow: hidden; /* Verhindert, dass der Text überläuft */
+    text-overflow: ellipsis; /* Fügt "..." hinzu, wenn der Text abgeschnitten wird */
+    line-height: 1.5;
+    text-align: left;
+}
+
+.card-text-haus-nummer {
+    width: 100%; /* Optional, abhängig von deinem Layout */
+}
+
+.left-aligned {
+    margin: 0; /* Entfernt die Standard-Margen oben und unten */
+    padding: 0; /* Entfernt eventuelle Innenabstände */
+    text-align: left; /* Stellt sicher, dass der Text linksbündig ist */
+}
+
+
+.left-aligned-icon {
+    margin-left: 5%;
+    text-align: left;
+}
+
+.card-margin{
+    margin: 1%;
+}

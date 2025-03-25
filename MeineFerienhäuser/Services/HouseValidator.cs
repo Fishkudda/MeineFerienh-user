@@ -27,22 +27,16 @@ namespace MeineFerienhäuser.Services
             foreach (House house in _houses)
             {
                 string pk = house.PK;
-                string image = house.ImageUrl;
-                string ferienhausurl = house.HouseUrl;
-                //CheckForImage
-                string baseUrlHouse = AppSettings.BaseUrlHouse;
-                
-                image = baseUrlHouse.Replace("{}",image);
-                
-                
+                string image = house.GetImageUrl();
+                string ferienhausurl = house.GetLinkUrl();
+                                          
                 Boolean avaliable = await IsWebSiteAvailable(image);
                 if (!avaliable)
                 {
                     _haus_has_error.Add(house);
                     house.HandleImageError();
                 }
-                string baseUrlLink = AppSettings.BaseUrlLink;
-                ferienhausurl = baseUrlLink.Replace("{}", ferienhausurl);
+
                 avaliable = await IsWebSiteAvailable(ferienhausurl);
                 if (!avaliable)
                 {
@@ -50,6 +44,7 @@ namespace MeineFerienhäuser.Services
                     _haus_has_error.Add(house);
                 }
             }
+            HouseFactory.SetErrorHouses(_haus_has_error);
 
         }
 

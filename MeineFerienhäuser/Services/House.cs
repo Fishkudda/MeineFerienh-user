@@ -1,6 +1,11 @@
-﻿namespace MeineFerienhäuser.Services
+﻿using System.Net;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace MeineFerienhäuser.Services
 {
-    public class House
+    public class House :  PageModel
     {
 
         public Boolean imageOK { get; set; } = false; // Ob das Image erreichbar ist.
@@ -45,6 +50,25 @@
             }
 
             this.HouseUrl = AppSettings.DefaultHouseLink;
+        }
+
+        public String GetImageUrl()
+        {
+            return AppSettings.BaseUrlHouse.Replace("{}", this.ImageUrl);
+        }
+
+        public String GetLinkUrl()
+        {
+            return AppSettings.BaseUrlLink.Replace("{}", this.HouseUrl);
+        }
+
+
+        public String GetDescription()
+        {
+            String htmldescription = this.Description;
+            htmldescription = WebUtility.HtmlDecode(htmldescription);
+            string plainText = Regex.Replace(htmldescription, "<.*?>", String.Empty);
+            return plainText;
         }
 
     }
