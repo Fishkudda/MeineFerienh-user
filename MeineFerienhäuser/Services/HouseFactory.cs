@@ -18,6 +18,20 @@ namespace MeineFerienhäuser.Services
             return _houses;
         }
 
+        public static List<House> GetHouseList(int indexStart,int ammount)
+        {
+            List<House> house_list = GetHouseList();
+            int indexMax = house_list.Count;
+            
+            if((indexStart + ammount) > indexMax)
+            {
+                ammount = indexMax - indexStart;
+            }
+
+            return house_list.Slice(indexStart,ammount);
+
+        }
+
         public static void SetHouseList(List<House> house)
         {
             if(house == null)
@@ -49,6 +63,8 @@ namespace MeineFerienhäuser.Services
 
 
         }
+
+   
 
 
     }

@@ -50,3 +50,11 @@ body {
 .card-margin{
     margin: 1%;
 }
+
+.logo{
+    max-height: 30px;
+}
+
+.link-button{
+    margin:2%;
+}

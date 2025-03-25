@@ -8,6 +8,18 @@
     <div class="container">
         <div class="row">
 
+            <form method="get">
+                <label for="itemsPerPage" class="form-label">Anzahl der Häuser pro Seite:</label>
+                <select id="itemsPerPage" name="itemsPerPage" class="form-select" onchange="this.form.submit()">
+                    
+                    <option value="6" >6</option>
+                    <option value="12" >12</option>
+                    <option value="24" >24</option>
+                    <option value="50" >50</option>
+                </select>
+                <input type="hidden" name="page" value="@Model.CurrentPage" />
+            </form>
+
     
         @for (int i = 0; i < Model.houses.Count; i++)
         {
@@ -34,7 +46,7 @@
                 </ul>
                     <p class="card-text card-text-description">@house.GetDescription()</p>
                     <div class="card-body left-aligned">
-                        <a href="@house.GetLinkUrl()" type="button" class="btn btn-primary ">Zum Haus @house.CatalogNumber</a>
+                        <a href="@house.GetLinkUrl()" type="button" class="btn btn-primary link-button">Zum Haus @house.CatalogNumber</a>
                 </div>
             </div>
         }
