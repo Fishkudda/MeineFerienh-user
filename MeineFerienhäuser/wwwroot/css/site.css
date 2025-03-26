@@ -1,3 +1,6 @@
+/* Die ganze Seite betreffende Einstellungen */
+
+
 /* Grundlegende Schriftgröße für den gesamten HTML-Tag */
 html {
     font-size: 14px;
@@ -6,7 +9,7 @@ html {
 /* Erhöht die Schriftgröße bei einer Mindestbreite von 768px */
 @media (min-width: 768px) {
     html {
-        font-size: 16px;
+        font-size: 12px;
     }
 }
 
@@ -26,6 +29,16 @@ body {
     margin-bottom: 60px;
 }
 
+/* Setzt den Text in allen Elementen mit der Klasse 'left-aligned' nach links ausgerichtet */
+.left-aligned {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* Ende */
+
+/* Einstellungen für die Informationen */
 /* Beschränkt die Anzahl der Textzeilen in der Beschreibung und fügt "..." hinzu, wenn der Text abgeschnitten wird */
 .card-text-description {
     display: -webkit-box;
@@ -37,17 +50,16 @@ body {
     text-align: left;
 }
 
+/* Ende */
+
+/* Einstellungen für die Cards */
+
 /* Stellt sicher, dass die Hausnummernbeschreibung ordnungsgemäß angezeigt wird */
 .card-text-haus-nummer {
     width: 100%;
 }
 
-/* Setzt den Text in allen Elementen mit der Klasse 'left-aligned' nach links ausgerichtet */
-.left-aligned {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-}
+
 
 /* Stellt sicher, dass die Symbole mit etwas Abstand nach links ausgerichtet sind */
 .left-aligned-icon {
@@ -70,8 +82,6 @@ body {
     margin: 2%;
 }
 
-
-
 /* Zentriert den Inhalt innerhalb der Container */
 .container {
     align-content: center;
@@ -82,6 +92,9 @@ body {
     text-align: left;
     width:20%;
 }
+/* Ende */
+
+/* Einstellungen für das Paginieren*/
 
 /* Stellt sicher, dass die Paginierung linksbündig ist */
 pagination-controls {
@@ -120,6 +133,10 @@ pagination-controls {
     text-overflow: ellipsis;
 }
 
+/* Ende */
+
+/* Einstellungen für die Darstellungen der Häuser Cards*/
+
 /* Container für die Boxen untereinander */
 .card-box-container {
     display: flex;
@@ -147,3 +164,5 @@ pagination-controls {
         .card-box-iterator::-webkit-scrollbar-thumb:hover {
             background-color: #555;
         }
+
+/* Ende */
