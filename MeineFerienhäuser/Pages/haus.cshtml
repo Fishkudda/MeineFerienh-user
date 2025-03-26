@@ -13,83 +13,93 @@
 
             <!-- Erste Box: Card Box Paginator -->
             <div class="card card-body card-box-paginator">
-                <div class="row">
 
 
-                    <div class="d-flex justify-content-between mb-4">
-                        <!-- Pagination Form -->
-                        <form method="get" class="form-select-house-per-side">
-                            <label for="itemsPerPage" class="form-label"></label>
-                            <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-house-per-side w-auto d-inline" onchange="this.form.submit()">
-                                @if (Model.ItemsPerPage == 6)
-                                {
-                                    <option value="6" selected>6 Häuser pro Seite</option>
-                                }
-                                else
-                                {
-                                    <option value="6">6 Häuser pro Seite</option>
-                                }
-                                @if (Model.ItemsPerPage == 12)
-                                {
-                                    <option value="12" selected>12 Häuser pro Seite</option>
-                                }
-                                else
-                                {
-                                    <option value="12">12 Häuser pro Seite</option>
-                                }
-                                @if (Model.ItemsPerPage == 24)
-                                {
-                                    <option value="24" selected>24 Häuser pro Seite</option>
-                                }
-                                else
-                                {
-                                    <option value="24">24 Häuser pro Seite</option>
-                                }
-                                @if (Model.ItemsPerPage == 50)
-                                {
-                                    <option value="50" selected>50 Häuser pro Seite</option>
-                                }
-                                else
-                                {
-                                    <option value="50">50 Häuser pro Seite</option>
-                                }
-                            </select>
-                            <input type="hidden" name="page" value="@Model.CurrentPage" />
-                        </form>
+                <div class="d-flex justify-content-between mb-4" id="width-control">
+
 
                         <!-- Pagination Navigation -->
-                        <nav aria-label="Page navigation" class="pagination-controls">
-                            <ul class="pagination justify-content-start pagination-controls">
-                                <!-- Previous Buttons -->
-                                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=1" aria-label="First">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@(Model.CurrentPage - 1)" aria-label="Previous">
-                                        <span aria-hidden="true">&lsaquo;</span>
-                                    </a>
-                                </li>
-
-                                <!-- Page Counter -->
-                                <li class="page-item disabled">
-                                    <span class="page-link page-counter">Seite @Model.CurrentPage / @Model.TotalPages</span>
-                                </li>
-
-                                <!-- Next Buttons -->
-                                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@(Model.CurrentPage + 1)" aria-label="Next">
-                                        <span aria-hidden="true">&rsaquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@Model.TotalPages" aria-label="Last">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
+                        <nav aria-label="Page navigation" class="nav-container">
+                            <ul class="pagination justify-content-start ">
+                            <li class="doppel-span">
+                                <!-- Pagination Form -->
+                                <form method="get" class="page-size-form">
+                                    <label for="itemsPerPage" class="form-label"></label>
+                                    <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-house-per-side w-auto d-inline" onchange="this.form.submit()">
+                                        @if (Model.ItemsPerPage == 6)
+                                        {
+                                            <option value="6" selected>6 Häuser pro Seite</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="6">6 Häuser pro Seite</option>
+                                        }
+                                        @if (Model.ItemsPerPage == 12)
+                                        {
+                                            <option value="12" selected>12 Häuser pro Seite</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="12">12 Häuser pro Seite</option>
+                                        }
+                                        @if (Model.ItemsPerPage == 24)
+                                        {
+                                            <option value="24" selected>24 Häuser pro Seite</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="24">24 Häuser pro Seite</option>
+                                        }
+                                        @if (Model.ItemsPerPage == 50)
+                                        {
+                                            <option value="50" selected>50 Häuser pro Seite</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="50">50 Häuser pro Seite</option>
+                                        }
+                                    </select>
+                                    <input type="hidden" name="page" value="@Model.CurrentPage" />
+                                </form>
+                            </li>
+                            <li class="reload-site-li">
+                                <a href="" type="button" class="btn btn-primary d-inline">
+                                    aktualisieren
+                                </a>
+                            </li>
                             </ul>
+                        
                         </nav>
+                    <ul class="pagination justify-content-start controls-pagination">
+                        <!-- Previous Buttons -->
+                        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=1" aria-label="First">
+                                <span aria-hidden="true" class="pag-arrow"><i class="bi bi-chevron-double-left"></i></span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@(Model.CurrentPage - 1)" aria-label="Previous">
+                                <span aria-hidden="true" class="pag-arrow"><i class="bi bi-chevron-compact-left"></i></span>
+                            </a>
+                        </li>
+
+                        <!-- Page Counter -->
+                        <li class="page-item disabled">
+                            <span class="page-link page-counter">Seite @Model.CurrentPage / @Model.TotalPages</span>
+                        </li>
+
+                        <!-- Next Buttons -->
+                        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@(Model.CurrentPage + 1)" aria-label="Next">
+                                <span aria-hidden="true" class="pag-arrow"><i class="bi bi-chevron-compact-right"></i></span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@Model.TotalPages" aria-label="Last">
+                                <span aria-hidden="true" class="pag-arrow"><i class="bi bi-chevron-double-right"></i></span>
+                            </a>
+                        </li>
+                    </ul>
                     </div>
 
                     <!-- Pagination Controls -->
@@ -105,7 +115,7 @@
                         </ul>
                     </nav>
                 </div>
-            </div>
+            
 
             <!-- Zweite Box: Card Box Iterator -->
             <div class="card card-body card-box-main card-box-iterator">
