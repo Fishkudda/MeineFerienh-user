@@ -23,3 +23,8 @@ window.addEventListener('resize', checkScreenSize);
 
 // Initiale Überprüfung beim Laden der Seite
 checkScreenSize();
+
+if (document.querySelector(".openErrorModal")) {
+    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+    errorModal.show();
+};

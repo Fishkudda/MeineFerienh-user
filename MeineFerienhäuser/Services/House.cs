@@ -8,8 +8,8 @@ namespace MeineFerienhäuser.Services
     public class House :  PageModel
     {
 
-        public Boolean imageOK { get; set; } = false; // Ob das Image erreichbar ist.
-        public Boolean urlOK { get; set; } = false;  // Ob die URL erreichbar ist.
+        public Boolean imageOK { get; set; } = true; // Ob das Image erreichbar ist.
+        public Boolean urlOK { get; set; } = true;  // Ob die URL erreichbar ist.
         public string PK { get; set; }                  // Primärschlüssel
         public string CatalogNumber { get; set; }      // Katalognummer
         public int Adults { get; set; }                // Anzahl der Erwachsenen
@@ -31,10 +31,7 @@ namespace MeineFerienhäuser.Services
         public void HandleImageError()
         {
 
-            if (imageOK)
-            {
-                return;
-            }
+            imageOK = false;
 
             this.ImageUrl = AppSettings.DefaultImagePath;
             
@@ -44,10 +41,7 @@ namespace MeineFerienhäuser.Services
 
         public void HandleHouseURLError()
         {
-            if (urlOK)
-            {
-                return;
-            }
+            this.urlOK = false;
 
             this.HouseUrl = AppSettings.DefaultHouseLink;
         }

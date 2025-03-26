@@ -6,7 +6,6 @@ namespace MeineFerienhäuser.Services
     {
         private List<House> _haus_has_error;
         private List<House> _houses;
-        private DateTime timestamp;
         private readonly HttpClient _httpClient;
 
         public HouseValidator(List<House> houses)
@@ -18,12 +17,6 @@ namespace MeineFerienhäuser.Services
 
         public async Task RunCheckAsync()
         {
-            if (IsNotOlderThan30Minutes(timestamp))
-            {
-                return;
-            }
-
-            timestamp = DateTime.Now.AddMinutes(-35);
             foreach (House house in _houses)
             {
                 string pk = house.PK;
@@ -43,22 +36,14 @@ namespace MeineFerienhäuser.Services
                     house.HandleHouseURLError();
                     _haus_has_error.Add(house);
                 }
+                //_haus_has_error.Add(house);//nur fürs testen
             }
+            
             HouseFactory.SetErrorHouses(_haus_has_error);
 
         }
 
 
-
-        private static bool IsNotOlderThan30Minutes(DateTime timestamp)
-        {
-
-            // Get the current time and subtract 30 minutes
-            DateTime thirtyMinutesAgo = DateTime.Now.AddMinutes(-30);
-
-            // Compare the timestamp with the time 30 minutes ago
-            return timestamp > thirtyMinutesAgo;
-        }
 
 
 
@@ -66,7 +51,7 @@ namespace MeineFerienhäuser.Services
         {
             try
             {
-                // Sende eine HEAD-Anfrage, um nur die Header zu erhalten
+                // Sende eine Get-Anfrage, um nur die Header zu erhalten
                 HttpResponseMessage response = await _httpClient.SendAsync(new HttpRequestMessage
                 {
                     //Method = HttpMethod.Head, nicht erlaubt daher Get
@@ -88,7 +73,6 @@ namespace MeineFerienhäuser.Services
             }
             catch (Exception ex)
             {
-          
                 return false;
             }
         }

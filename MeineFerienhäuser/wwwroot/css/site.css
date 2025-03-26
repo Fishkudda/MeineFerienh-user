@@ -33,10 +33,11 @@ body {
 
 /* Setzt den Text in allen Elementen mit der Klasse 'left-aligned' nach links ausgerichtet */
 .left-aligned {
-    margin: 0;
-    padding: 0;
+    margin: 1%;
+    padding: 1%;
     text-align: left;
 }
+
 
 /* Ende */
 
@@ -198,10 +199,11 @@ pagination-controls {
         width: 200px !important; /* Breite für kleinere Bildschirme */
     }
 }
-
-.pag-arrow{
-   
+.card-box-div {
+    border-bottom: 1px solid lightgray; /* Dünne graue Linie am unteren Rand */
+    padding: 10px 0; /* Optional: Abstand innen */
 }
+
 
 
 /* Ende */

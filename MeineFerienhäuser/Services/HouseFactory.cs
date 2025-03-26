@@ -64,7 +64,14 @@ namespace MeineFerienhäuser.Services
 
         }
 
-   
+        public static async Task Load()
+        {
+            Dataloader loader = new Dataloader();
+            await loader.LoadHouses();
+            await loader.GetHouseListAsync();
+        }
+
+
 
 
     }

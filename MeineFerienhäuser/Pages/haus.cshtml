@@ -4,7 +4,43 @@
     ViewData["Title"] = "Wir lieben Ferienhäuser";
 }
 
+
+@if (Model.OpenErrorWindow && Model.HousesWithError.Count > 0)
+{
+    <div class="openErrorModal"></div>
+}
+
+@{
+    Model.OpenErrorWindow = false;
+}
+
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Fehler</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+            </div>
+            <div class="modal-body" id="errorMessage">
+                <ul>
+
+                    @for (var i = 0; i < Model.HousesWithError.Count; i++)
+                        {
+                            var house = Model.HousesWithError[i];
+                            <li>
+                                Fehler bei Haus : @house.PK; Laden des Bildes: @house.imageOK; Route zum dansk.de: @house.urlOK;
+                            </li>                      
+                        }
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="text-center">
+
     <div class="container">
           <!-- Informationen -->
         @await Html.PartialAsync("Info")
@@ -15,7 +51,7 @@
             <div class="card card-body card-box-paginator">
 
 
-                <div class="d-flex justify-content-between mb-4" id="width-control">
+                <div class="d-flex justify-content-between mb-4 card-box-div" id="width-control">
 
 
                         <!-- Pagination Navigation -->
@@ -63,9 +99,12 @@
                                 </form>
                             </li>
                             <li class="reload-site-li">
-                                <a href="" type="button" class="btn btn-primary d-inline">
-                                    aktualisieren
-                                </a>
+                                <form method="post" asp-page-handler="LoadWithBoolean">
+                                    <input type="hidden" name="fire" value="true" />
+                                    <button type="submit" class="btn btn-primary d-inline">
+                                        aktualisieren
+                                    </button>
+                                </form>
                             </li>
                             </ul>
                         

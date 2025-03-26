@@ -28,10 +28,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-Dataloader loader = new Dataloader();
-await loader.LoadHouses();
-List<House> houses = await loader.GetHouseListAsync();
-
+await HouseFactory.Load();
 
 
 app.UseHttpsRedirection();
