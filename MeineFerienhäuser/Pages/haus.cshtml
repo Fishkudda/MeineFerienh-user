@@ -1,59 +1,200 @@
 ﻿@page
-@model HausModel
+@model MeineFerienhäuser.Pages.HausModel
 @{
     ViewData["Title"] = "Wir lieben Ferienhäuser";
 }
 
 <div class="text-center">
     <div class="container">
-        <div class="row">
-
-            <form method="get">
-                <label for="itemsPerPage" class="form-label">Anzahl der Häuser pro Seite:</label>
-                <select id="itemsPerPage" name="itemsPerPage" class="form-select" onchange="this.form.submit()">
-                    
-                    <option value="6" >6</option>
-                    <option value="12" >12</option>
-                    <option value="24" >24</option>
-                    <option value="50" >50</option>
-                </select>
-                <input type="hidden" name="page" value="@Model.CurrentPage" />
-            </form>
-
-    
-        @for (int i = 0; i < Model.houses.Count; i++)
-        {
-            var house = Model.houses[i];
-            <div class="card card-margin" style="width: 18rem;">
-                <img src="@house.GetImageUrl()" class="card-img-top" alt="@Model.altImg">
-                <div class="card-body">
-                    <h6 class="card-title">
-
-                        @{
-                            int hausnr=i+1;
-                        }
-                            <div class="card-text-haus-nummer">
-                                <p class="card-text left-aligned">Haus @hausnr: </p>
-                                <p class="card-text left-aligned">@house.CatalogNumber in @house.AreaName</p>
-                            </div>
-                    </h6>
-                    
-                </div>
-                <ul class="list-group list-group-flush">
-                        <li class="list-group-item left-aligned-icon"> <i class="bi bi-people-fill"></i> @house.Adults Erwachsene</li>
-                        <li class="list-group-item left-aligned-icon"> <i class="bi bi-person-fill"></i> @house.Children Kinder</li>
-                        <li class="list-group-item left-aligned-icon"> <i class="bi bi-bug-fill"> </i>@house.Pets Haustiere</li>
-                </ul>
-                    <p class="card-text card-text-description">@house.GetDescription()</p>
-                    <div class="card-body left-aligned">
-                        <a href="@house.GetLinkUrl()" type="button" class="btn btn-primary link-button">Zum Haus @house.CatalogNumber</a>
+        <!-- Information Section -->
+        <div class="mb-4">
+            <button class="btn btn-primary mb-2 d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo">
+                <span>Informationen</span>
+                <span class="ms-2"><i class="bi bi-chevron-down"></i></span> <!-- Bootstrap Icon für das Dreieck -->
+            </button>
+            <div class="collapse" id="collapseInfo">
+                <div class="card card-body card-body-sorted">
+                    <div class="row">
+                        <!-- Linke Spalte -->
+                        <div class="col-md-6">
+                            <h6>Das gesamte Layout basiert auf dem Standardtemplate mit Bootstrap 5 und Bootstrap Icons. Der Button soll das Haus in einem neuen Tab öffnen.</h6>
+                            <ol>
+                                <li>Basisprojekt aufsetzen</li>
+                                <li>Seiten anlegen und Layout anpassen</li>
+                                <li>Hausdaten laden</li>
+                                <li>Hausliste mit Cards darstellen</li>
+                                <li>Paging einbauen</li>
+                                <li>Variable PageSize hinzufügen</li>
+                            </ol>
+                        </div>
+                        <!-- Rechte Spalte -->
+                        <div class="col-md-6">
+                            <h6>Diese Seite soll eine kurze Übersicht über unsere Häuser zeigen. Infos zu den Dateien:</h6>
+                            <ul>
+                                <li>Daten: <a href="https://img.dansk.de/challenge/houses.json" target="_blank">https://img.dansk.de/challenge/houses.json</a></li>
+                                <li>Logo: <a href="https://img.dansk.de/assets/dansk/portal-logo.svg" target="_blank">https://img.dansk.de/assets/dansk/portal-logo.svg</a></li>
+                                <li>Hausbilder: <a href="https://hpix.dansk.de/[House.ImageUrl]?width=600" target="_blank">https://hpix.dansk.de/[House.ImageUrl]?width=600</a></li>
+                                <li>Link: <a href="https://www.dansk.de[HouseUrl]" target="_blank">https://www.dansk.de[HouseUrl]</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        }
         </div>
-        </div>
+        <!-- Container für beide Boxen untereinander -->
+        <div class="card-box-container">
+
+            <!-- Erste Box: Card Box Paginator -->
+            <div class="card card-body card-box-paginator">
+                <div class="row">
 
 
+                    <div class="d-flex justify-content-between mb-4">
+                        <!-- Pagination Form -->
+                        <form method="get" class="form-select-house-per-side">
+                            <label for="itemsPerPage" class="form-label"></label>
+                            <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-house-per-side w-auto d-inline" onchange="this.form.submit()">
+                                @if (Model.ItemsPerPage == 6)
+                                {
+                                    <option value="6" selected>6 Häuser pro Seite</option>
+                                }
+                                else
+                                {
+                                    <option value="6">6 Häuser pro Seite</option>
+                                }
+                                @if (Model.ItemsPerPage == 12)
+                                {
+                                    <option value="12" selected>12 Häuser pro Seite</option>
+                                }
+                                else
+                                {
+                                    <option value="12">12 Häuser pro Seite</option>
+                                }
+                                @if (Model.ItemsPerPage == 24)
+                                {
+                                    <option value="24" selected>24 Häuser pro Seite</option>
+                                }
+                                else
+                                {
+                                    <option value="24">24 Häuser pro Seite</option>
+                                }
+                                @if (Model.ItemsPerPage == 50)
+                                {
+                                    <option value="50" selected>50 Häuser pro Seite</option>
+                                }
+                                else
+                                {
+                                    <option value="50">50 Häuser pro Seite</option>
+                                }
+                            </select>
+                            <input type="hidden" name="page" value="@Model.CurrentPage" />
+                        </form>
+
+                        <!-- Pagination Navigation -->
+                        <nav aria-label="Page navigation" class="pagination-controls">
+                            <ul class="pagination justify-content-start pagination-controls">
+                                <!-- Previous Buttons -->
+                                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=1" aria-label="First">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@(Model.CurrentPage - 1)" aria-label="Previous">
+                                        <span aria-hidden="true">&lsaquo;</span>
+                                    </a>
+                                </li>
+
+                                <!-- Page Counter -->
+                                <li class="page-item disabled">
+                                    <span class="page-link page-counter">Seite @Model.CurrentPage / @Model.TotalPages</span>
+                                </li>
+
+                                <!-- Next Buttons -->
+                                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@(Model.CurrentPage + 1)" aria-label="Next">
+                                        <span aria-hidden="true">&rsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@Model.TotalPages" aria-label="Last">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    <nav aria-label="Page navigation" class="mt-4 pagination-controls">
+                        <ul class="pagination justify-content-start pagination-controls custom-pagination">
+                            <!-- Links ausgerichtet -->
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                                    <a class="page-link" href="?itemsPerPage=@Model.ItemsPerPage&page=@i">@i</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Zweite Box: Card Box Iterator -->
+            <div class="card card-body card-box-main card-box-iterator">
+                @if (Model.Houses != null && Model.Houses.Count > 0)
+                {
+                    <div class="row">
+                        @for (var i = 0; i < Model.Houses.Count; i++)
+                        {
+                            var house = Model.Houses[i];
+                            var zähler = i + 1;
+
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                                <div class="card h-100">
+                                    <!-- Image Container -->
+                                    <div class="image-container position-relative">
+                                        <img src="@house.GetImageUrl()"
+                                             class="card-img-top lazy-image"
+                                             alt="@Model.AltImg"
+                                             loading="lazy" />
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <div class="card-text-haus-nummer">
+                                                <p class="card-text left-aligned">Haus @zähler:</p>
+                                                <p class="card-text left-aligned">@house.CatalogNumber in @house.AreaName</p>
+                                            </div>
+                                        </h6>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item left-aligned-icon">
+                                            <i class="bi bi-people-fill"></i> @house.Adults Erwachsene
+                                        </li>
+                                        <li class="list-group-item left-aligned-icon">
+                                            <i class="bi bi-person-fill"></i> @house.Children Kinder
+                                        </li>
+                                        <li class="list-group-item left-aligned-icon">
+                                            <i class="bi bi-bug-fill"></i> @house.Pets Haustiere
+                                        </li>
+                                    </ul>
+                                    <p class="card-text card-text-description">@house.GetDescription()</p>
+                                    <div class="card-body left-aligned">
+                                        <a href="@house.GetLinkUrl()" type="button" class="btn btn-primary link-button">
+                                            Zum Haus @house.CatalogNumber
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">Keine Häuser gefunden.</p>
+                }
+            </div>
+        </div>
+    </div>
 </div>
-
-
